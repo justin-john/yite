@@ -1,6 +1,6 @@
 {
-  "name": "lite",
-  "description": "A lite web framework for Node.js called Lite.",
+  "name": "yite",
+  "description": "A web framework for Node.js called Yite.",
   "keywords": [
     "framework",
     "node.js",
@@ -8,7 +8,7 @@
     "library"
   ],
   "maintainers": "Justin John Mathews <justinjohnmathews@gmail.com>",
-  "homepage": "https://github.com/justin-john/lite",
+  "homepage": "https://github.com/justin-john/yite",
   "version": "0.0.1",
   "author": {
     "name": "Justin John Mathews",
@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/justin-john/lite.git"
+    "url": "https://github.com/justin-john/yite.git"
   },
   "bugs": {
-    "url": "https://github.com/justin-john/lite/issues"
+    "url": "https://github.com/justin-john/yite/issues"
   },
-  "main": "./lib/lite",
+  "main": "./lib/yite",
   "dependencies": {},
   "devDependencies": {},
   "engines": {

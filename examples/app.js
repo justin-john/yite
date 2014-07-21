@@ -1,8 +1,8 @@
 
 var http = require('http');
-var lite = require('../lib/lite');
+var yite = require('../lib/yite');
 
-lite.config({
+yite.config({
     templateEngine: 'swig',
     errorFilePath: __dirname + '/views/error.html',
     controller: __dirname + '/controller',
@@ -10,6 +10,6 @@ lite.config({
 });
 
 http.createServer(function (request, response) {
-    lite.init(request, response);
+    yite.init(request, response);
 }).listen(3000);
 console.log('Server running at http://127.0.0.1:3000/');

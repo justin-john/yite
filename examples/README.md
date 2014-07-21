@@ -1,4 +1,4 @@
-Example of Lite Framework Application
+Example of Yite Framework Application
 =====================================
 
 ## To run the application
