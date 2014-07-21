@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Angular Node Home{% endblock %}
+
+{% block head %}
+  {% parent %}
+{% endblock %}
+
+{% block content %}
+<h1>Your are entered in index page cccc.</h1>
+<ul>
+{% for user in users %}
+  <li{% if loop.first %} class="first"{% endif %}>
+    {{ user }}
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

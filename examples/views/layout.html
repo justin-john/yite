@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Angular Node App{% endblock %}</title>
+
+  {% block head %}
+  <link rel="stylesheet" href="css/main.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  {% endblock %}
+</head>
+<body ng-app>
+  {% block content %}{% endblock %}
+</body>
+</html>

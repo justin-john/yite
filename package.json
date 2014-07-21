@@ -1,0 +1,36 @@
+{
+  "name": "lite",
+  "description": "A lite web framework for Node.js called Lite.",
+  "keywords": [
+    "framework",
+    "node.js",
+    "REST API",
+    "library"
+  ],
+  "maintainers": "Justin John Mathews <justinjohnmathews@gmail.com>",
+  "homepage": "https://github.com/justin-john/lite",
+  "version": "0.0.1",
+  "author": {
+    "name": "Justin John Mathews",
+    "email": "justinjohnmathews@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Justin John Mathews",
+      "email": "justinjohnmathews@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justin-john/lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justin-john/lite/issues"
+  },
+  "main": "./lib/lite",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
