@@ -29,8 +29,11 @@ http.createServer(function (request, response) {
 }).listen(3000);
 ```
 
-The application will listen on 3000.
-The `yite` will use some configs to set the application. It will set template engine, controller file path, viewRoutes file path, error file path etc in application. The yite supports swig, jade and ejs template engines.
+The yite application will listen on port 3000.
+The `yite` will use some configs to set the application. It will set template engine, controller file path, viewRoutes file path, error file path etc in application. The yite supports [swig](http://paularmstrong.github.io/swig), [jade](http://jade-lang.com/) and [ejs](http://embeddedjs.com/) template engines. The npm module of template engine needs to required/installed in your application.
+All filename(controller.js, view-paths.js) can be changed to your convenience.
+
+If no yite configs are given, it will take the defaults values, which are same as above given yite configs. 
 
 ##### controller.js
 ```javascript
@@ -74,10 +77,27 @@ We can override the default view-paths file in yite configs.
 
 By using above files we can start to create an application.
 
-An demo application is given with examples.
+In examples folder of this repo, there is an example usage of yite in an application.
 
-Yite is still an experimental version.
-Want to improve the yite stuff, please don't hesitate. Make a [Pull Request](https://github.com/justin-john/yite/pulls) or create an [issue](https://github.com/justin-john/yite/issues).
+### Working of Yite
+
+When user access a route(request url) like "localhost:3000/home", the request first passes to controller's method `home` in `controller.js` and return the response as json. But if we need to render a html page for corresponding route, then it needs to add map route in `view-paths.js` file. This will lead to parse the controller's json response into view html file using template engines. The final output will be locals object parsed in raw html.
+
+#### Some routing examples
+
+| URL                    | Request Method  | Controller Method | View Path Map                     | Explanation                                                                                                                                                                                                                                                          |
+|------------------------|:----------------|-------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| localhost:3000         | GET             |             index | '/'     : '/views/index.html'     | The route will check controller have method called `index`. The response is raw html which will be rendered with parsing json object from method |
+| localhost:3000/add     | POST            |               add |                                   | The route will check controller have method called `add`. It will return response as json object as no view mapping is given. |
+| localhost:3000/home    | GET             |              home | '/home' : '/views/home.html'      | The route will check controller have method called `home`. The view html will be rendered with parsing json object from method . |
+| localhost:3000/contact | GET/POST        |           contact | '/home' : '/views/contact.html'   | The route will check controller have method called `contact`. The view html will be rendered with parsing json object from method .  |
+| localhost:3000/contact | GET/POST        |           contact |                                   | The route will check controller have method called `contact`. It will return response as json object.  |
+
+### Relases Notes
+Yite is still an experimental version. 
+
+Want to improve the yite stuff, please don’t hesitate to fork and make a [Pull Request](https://github.com/justin-john/yite/pulls). If you have any questions, thoughts, concerns or feedback, please don't hesitate to create an [issue](https://github.com/justin-john/yite/issues).
+Your suggestions are always welcome!
 
 ## License
 
