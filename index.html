@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Yite : A lite web framework for Node.js called Yite.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Yite</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/justin-john/yite">View on GitHub</a>
+
+          <h1 id="project_title">Yite</h1>
+          <h2 id="project_tagline">A lite web framework for Node.js called Yite.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/justin-john/yite/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/justin-john/yite/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="yite-web-framework-for-nodejs" class="anchor" href="#yite-web-framework-for-nodejs"><span class="octicon octicon-link"></span></a>Yite Web Framework for Node.js</h1>
+
+<p>A lite web framework for Node.js called Yite. This framework helps to create web pages and web applications with Javascript in Controller-View Pattern.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>npm install yite
+</pre></div>
+
+<h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
+
+<h5>
+<a name="appjs" class="anchor" href="#appjs"><span class="octicon octicon-link"></span></a>app.js</h5>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">yite</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'yite'</span><span class="p">);</span>
+
+<span class="nx">yite</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+  <span class="nx">templateEngine</span><span class="o">:</span> <span class="s1">'swig'</span><span class="p">,</span>
+  <span class="nx">errorFilePath</span><span class="o">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/views/error.html'</span><span class="p">,</span>
+  <span class="nx">controller</span><span class="o">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/controller'</span><span class="p">,</span>
+  <span class="nx">viewsRoutes</span><span class="o">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/view-paths'</span>
+<span class="p">});</span>
+
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">yite</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</pre></div>
+
+<p>The yite application will listen on port 3000.
+The <code>yite</code> will use some configs to set the application. It will set template engine, controller file path, viewRoutes file path, error file path etc in application. The yite supports <a href="http://paularmstrong.github.io/swig">swig</a>, <a href="http://jade-lang.com/">jade</a> and <a href="http://embeddedjs.com/">ejs</a> template engines. The npm module of template engine needs to required/installed in your application.
+All filename(controller.js, view-paths.js) can be changed to your convenience.</p>
+
+<p>If no yite configs are given, it will take the defaults values, which are same as above given yite configs. </p>
+
+<h5>
+<a name="controllerjs" class="anchor" href="#controllerjs"><span class="octicon octicon-link"></span></a>controller.js</h5>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">_index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">reqMethod</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">test</span><span class="o">:</span> <span class="s1">'testcvc'</span><span class="p">,</span>
+            <span class="nx">users</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Gewrt'</span><span class="p">,</span> <span class="s1">'Jim'</span><span class="p">,</span> <span class="s1">'Jane'</span><span class="p">]</span>
+        <span class="p">};</span>
+    <span class="p">},</span><span class="nx">_add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">reqMethod</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">pagename</span><span class="o">:</span> <span class="s1">'awesome people'</span><span class="p">,</span>
+            <span class="nx">authors</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Paul'</span><span class="p">,</span> <span class="s1">'Jim'</span><span class="p">,</span> <span class="s1">'Jane'</span><span class="p">]</span>
+        <span class="p">};</span>
+    <span class="p">},</span> <span class="nx">_test</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">reqMethod</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">pagename</span><span class="o">:</span> <span class="s1">'awesome people'</span><span class="p">,</span>
+            <span class="nx">authors</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Paul'</span><span class="p">,</span> <span class="s1">'Jim'</span><span class="p">,</span> <span class="s1">'Jane'</span><span class="p">]</span>
+        <span class="p">};</span>
+    <span class="p">},</span> <span class="nx">_contact</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">reqMethod</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">locals</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">pagename</span><span class="o">:</span> <span class="s1">'awesome people'</span><span class="p">,</span>
+            <span class="nx">authors</span><span class="o">:</span> <span class="p">[</span><span class="s1">'Justin'</span><span class="p">,</span> <span class="s1">'John'</span><span class="p">,</span> <span class="s1">'Mathews'</span><span class="p">]</span>
+        <span class="p">};</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">getParsedFileData</span><span class="p">(</span><span class="s1">'views/home.html'</span><span class="p">,</span> <span class="nx">locals</span><span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">'Content-Type'</span><span class="o">:</span> <span class="s1">'text/html'</span> <span class="p">});</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="s1">'utf-8'</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">index</span><span class="o">:</span> <span class="nx">_index</span><span class="p">,</span>
+        <span class="nx">add</span><span class="o">:</span> <span class="nx">_add</span><span class="p">,</span>
+        <span class="nx">test</span><span class="o">:</span> <span class="nx">_test</span><span class="p">,</span>
+        <span class="nx">contact</span><span class="o">:</span> <span class="nx">_contact</span>
+    <span class="p">}</span>
+<span class="p">})();</span>
+</pre></div>
+
+<p>The controller file will return method to each request. Each method will have first argument as request method(GET or POST) and second argument as parameters passed in GET and POST request. Two more arguments(request and response objects) are given optionally, if end user needs any alternation in request and response handling.
+For example, The <code>http://localhost:3000/add</code> request url will attach to <code>add</code> method in controller. We should specify the each method in controller file for each request(GET &amp; POST).
+We can override the default controller file path in yite configs.
+The <code>http://localhost:3000/contact</code> request will be received in <code>_contact</code> method. This method is example of how to override default behaviour. Here <code>res.getParsedFileData</code> will return data with parsed object.</p>
+
+<h5>
+<a name="view-pathsjs" class="anchor" href="#view-pathsjs"><span class="octicon octicon-link"></span></a>view-paths.js</h5>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">viewsHTMLPaths</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">routeHTMLs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'/'</span>     <span class="o">:</span> <span class="s1">'/views/index.html'</span><span class="p">,</span>
+    <span class="s1">'/add'</span>  <span class="o">:</span> <span class="s1">'/views/add.html'</span><span class="p">,</span>
+    <span class="s1">'/home'</span> <span class="o">:</span> <span class="s1">'/views/home.html'</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="nx">viewsHTMLPaths</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">routeHTMLs</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>The view-paths file is used to map request route to HTML file.
+For example, The <code>http://localhost:3000/add</code> will attach to <code>add.html</code> HTML file in views.
+We can override the default view-paths file in yite configs.</p>
+
+<p>By using above files we can start to create an application.</p>
+
+<p>In examples folder of this repo, there is an example usage of yite in an application.</p>
+
+<h3>
+<a name="working-of-yite" class="anchor" href="#working-of-yite"><span class="octicon octicon-link"></span></a>Working of Yite</h3>
+
+<p>When user access a route(request url) like "localhost:3000/home", the request first passes to controller's method <code>home</code> in <code>controller.js</code> and return the response as json. But if we need to render a html page for corresponding route, then it needs to add map route in <code>view-paths.js</code> file. This will lead to parse the controller's json response into view html file using template engines. The final output will be locals object parsed in raw html.</p>
+
+<h4>
+<a name="some-routing-examples" class="anchor" href="#some-routing-examples"><span class="octicon octicon-link"></span></a>Some routing examples</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th align="left">Request Method</th>
+<th>Controller Method</th>
+<th align="left">View Path Map</th>
+<th align="center">Explanation</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>localhost:3000</td>
+<td align="left">GET</td>
+<td>index</td>
+<td align="left">'/'     : '/views/index.html'</td>
+<td align="center">The route will check controller have method called <code>index</code>. The response is raw html which will be rendered with parsing json object from method</td>
+</tr>
+<tr>
+<td>localhost:3000/add</td>
+<td align="left">POST</td>
+<td>add</td>
+<td align="left"></td>
+<td align="center">The route will check controller have method called <code>add</code>. It will return response as json object as no view mapping is given.</td>
+</tr>
+<tr>
+<td>localhost:3000/home</td>
+<td align="left">GET</td>
+<td>home</td>
+<td align="left">'/home' : '/views/home.html'</td>
+<td align="center">The route will check controller have method called <code>home</code>. The view html will be rendered with parsing json object from method .</td>
+</tr>
+<tr>
+<td>localhost:3000/contact</td>
+<td align="left">GET/POST</td>
+<td>contact</td>
+<td align="left">'/contact' : '/views/contact.html'</td>
+<td align="center">The route will check controller have method called <code>contact</code>. The view html will be rendered with parsing json object from method .</td>
+</tr>
+<tr>
+<td>localhost:3000/contact</td>
+<td align="left">GET/POST</td>
+<td>contact</td>
+<td align="left"></td>
+<td align="center">The route will check controller have method called <code>contact</code>. It will return response as json object.</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="api-reference" class="anchor" href="#api-reference"><span class="octicon octicon-link"></span></a>API Reference</h3>
+
+<h5>
+<a name="resgetparsedfiledatapath-locals-object-encoding" class="anchor" href="#resgetparsedfiledatapath-locals-object-encoding"><span class="octicon octicon-link"></span></a>res.getParsedFileData(path, [locals object], [encoding])</h5>
+
+<p>This method returns data parsed by object to create dynamic file content from template engines. The arguments will <code>path</code>
+for file path, <code>locals</code> the objects which parse in file for creating dynamic file and <code>encoding</code> is optional, which defaults
+to <code>utf8</code> encoding.</p>
+
+<h3>
+<a name="relases-notes" class="anchor" href="#relases-notes"><span class="octicon octicon-link"></span></a>Relases Notes</h3>
+
+<p>Yite is still an experimental version.</p>
+
+<p>Want to improve the yite stuff, please don’t hesitate to fork and make a <a href="https://github.com/justin-john/yite/pulls">Pull Request</a>. If you have any questions, thoughts, concerns or feedback, please don't hesitate to create an <a href="https://github.com/justin-john/yite/issues">issue</a>.
+Your suggestions are always welcome!</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2014 Justin John Mathews <a href="mailto:justinjohnmathews@gmail.com">justinjohnmathews@gmail.com</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yite maintained by <a href="https://github.com/justin-john">justin-john</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-54151520-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
