@@ -38,27 +38,43 @@ If no yite configs are given, it will take the defaults values, which are same a
 ##### controller.js
 ```javascript
 module.exports = (function () {
-  var _index = function(reqMethod, params) {
-    return {
-      pagename: 'awesome people',
-      authors: ['Paul', 'Jim', 'Jane']
+    var _index = function(reqMethod, params) {
+        return {
+            test: 'testcvc',
+            users: ['Gewrt', 'Jim', 'Jane']
+        };
+    },_add = function(reqMethod, params) {
+        return {
+            pagename: 'awesome people',
+            authors: ['Paul', 'Jim', 'Jane']
+        };
+    }, _test = function(reqMethod, params) {
+        return {
+            pagename: 'awesome people',
+            authors: ['Paul', 'Jim', 'Jane']
+        };
+    }, _contact = function(reqMethod, params, req, res) {
+        var locals = {
+            pagename: 'awesome people',
+            authors: ['Justin', 'John', 'Mathews']
+        };
+        var data = res.getParsedFileData('views/home.html', locals);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data, 'utf-8');
     };
-  }, _add = function(reqMethod, params) {
-    return {
-      pagename: 'awesome people',
-      authors: ['Paul', 'Jim', 'Jane']
-    };
-  };
 
-  return {
-    index: _index,
-    add: _add,
-  }
+    return {
+        index: _index,
+        add: _add,
+        test: _test,
+        contact: _contact
+    }
 })();
 ```
 The controller file will return method to each request. Each method will have first argument as request method(GET or POST) and second argument as parameters passed in GET and POST request. Two more arguments(request and response objects) are given optionally, if end user needs any alternation in request and response handling.
 For example, The `http://localhost:3000/add` request url will attach to `add` method in controller. We should specify the each method in controller file for each request(GET & POST).
 We can override the default controller file path in yite configs.
+The `http://localhost:3000/contact` request will be received in `_contact` method. This method is example of how to override default behaviour. Here `res.getParsedFileData` will return data with parsed object.
 
 ##### view-paths.js
 ```javascript
@@ -87,14 +103,21 @@ When user access a route(request url) like "localhost:3000/home", the request fi
 
 | URL                    | Request Method  | Controller Method | View Path Map                     | Explanation                                                                                                                                                                                                                                                          |
 |------------------------|:----------------|-------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| localhost:3000         | GET             |             index | '/'     : '/views/index.html'     | The route will check controller have method called `index`. The response is raw html which will be rendered with parsing json object from method |
+| localhost:3000         | GET             |             index |'/'     : '/views/index.html'     | The route will check controller have method called `index`. The response is raw html which will be rendered with parsing json object from method |
 | localhost:3000/add     | POST            |               add |                                   | The route will check controller have method called `add`. It will return response as json object as no view mapping is given. |
-| localhost:3000/home    | GET             |              home | '/home' : '/views/home.html'      | The route will check controller have method called `home`. The view html will be rendered with parsing json object from method . |
-| localhost:3000/contact | GET/POST        |           contact | '/home' : '/views/contact.html'   | The route will check controller have method called `contact`. The view html will be rendered with parsing json object from method .  |
+| localhost:3000/home    | GET             |              home |'/home' : '/views/home.html'      | The route will check controller have method called `home`. The view html will be rendered with parsing json object from method . |
+| localhost:3000/contact | GET/POST        |           contact |'/contact' : '/views/contact.html'   | The route will check controller have method called `contact`. The view html will be rendered with parsing json object from method .  |
 | localhost:3000/contact | GET/POST        |           contact |                                   | The route will check controller have method called `contact`. It will return response as json object.  |
 
+### API Reference
+
+#####res.getParsedFileData(path, [locals object], [encoding])
+This method returns data parsed by object to create dynamic file content from template engines. The arguments will `path`
+for file path, `locals` the objects which parse in file for creating dynamic file and `encoding` is optional, which defaults
+to `utf8` encoding.
+
 ### Relases Notes
-Yite is still an experimental version. 
+Yite is still an experimental version.
 
 Want to improve the yite stuff, please don’t hesitate to fork and make a [Pull Request](https://github.com/justin-john/yite/pulls). If you have any questions, thoughts, concerns or feedback, please don't hesitate to create an [issue](https://github.com/justin-john/yite/issues).
 Your suggestions are always welcome!
