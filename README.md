@@ -33,7 +33,8 @@ The yite application will listen on port 3000.
 The `yite` will use some configs to set the application. It will set template engine, controller file path, viewRoutes file path, error file path etc in application. The yite supports [swig](http://paularmstrong.github.io/swig), [jade](http://jade-lang.com/) and [ejs](http://embeddedjs.com/) template engines. The npm module of template engine needs to required/installed in your application.
 All filename(controller.js, view-paths.js) can be changed to your convenience.
 
-If no yite configs are given, it will take the defaults values, which are same as above given yite configs. 
+If no yite configs are given, it will take the defaults values, which are same as above given yite configs.
+Please create an empty error file(`error.html`) in location specified in errorFilePath config.  
 
 ##### controller.js
 ```javascript
