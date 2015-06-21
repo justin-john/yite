@@ -127,4 +127,4 @@ Your suggestions are always welcome!
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Justin John Mathews <justinjohnmathews@gmail.com>
+Copyright (c) 2015 Justin John Mathews <justinjohnmathews@gmail.com>
